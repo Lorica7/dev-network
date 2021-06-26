@@ -7,6 +7,9 @@ const mongoose = require('mongoose')
 
 connectDB();
 
+app.use(express.json({ extended: true }))
+// app.use(express.urlencoded());
+
 mongoose.Promise = global.Promise;
 
 //DEfine routes
