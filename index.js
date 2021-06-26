@@ -1,16 +1,14 @@
 const express = require('express');
 const connectDB = require('./config/db');
 require('dotenv').config();
+
 const app = express();
 
-const mongoose = require('mongoose')
 
 connectDB();
 
 app.use(express.json({ extended: true }))
-// app.use(express.urlencoded());
 
-mongoose.Promise = global.Promise;
 
 //DEfine routes
 
