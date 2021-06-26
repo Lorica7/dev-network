@@ -3,9 +3,9 @@ const {check, validationResult} = require('express-validator')
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
-const config = require('config');
-const User = require('../../models/User')
-
+const jwt = require('jsonwebtoken');
+const User = require('../../models/User');
+require('dotenv').config();
 const connectDB = require('../../config/db');
 
 // GET api/users
@@ -56,11 +56,14 @@ router.post('/', [
          };
 
        //  return json webtoken
+            jwt.sign(payload, process.env.jwtSecret,
+                (err, token) => {
+                    if (err) throw err;
+                    res.json({token})
+            }
+            )
 
-         res.send('Users Route')
-    }
-     
-     catch (err) {
+    } catch (err) {
          console.error(err.message)
          res.status(500).send('server error')
      }
